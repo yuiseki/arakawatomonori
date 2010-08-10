@@ -69,9 +69,9 @@ template :index do
   %head
     %meta{ 'http-equiv' => 'content', :content => 'text/html; charset=utf-8'}
     %title=@title
-  %body{:style=>"background-image: url(/back.jpg); font-family:san-selif;"}
+  %body{:style=>"background-image: url(/back.jpg); font-family:san-selif; background-size: contain;"}
     %div{:style=>"width:800px;margin:auto;"}
-      %h1{:style=>"margin:20px; font-size:5em;"}=@title
+      %h1{:style=>"margin:15px; padding:10px; font-size:5em; background-image: url(/white80.png); border:1px solid black; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius:10px;"}=@title
       - @result.each do |i|
         - unless i[1] == ""
           %div{:style=>"background-image: url(/white80.png); margin:15px; padding:15px; border:1px solid black; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius:10px;"}
