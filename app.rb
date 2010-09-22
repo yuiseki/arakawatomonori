@@ -54,6 +54,33 @@ get '/' do
 end
 
 get '/rss' do
+	articles = get_gdocs
+	rss = RSS::Maker.make("1.0", ["dublincore"]) do |maker|
+		maker.channel.about = "http://xn--fdr45z90g374a.jp/rss"
+		maker.channel.title = "荒川智則.jp"
+		maker.channel.description = "東京の中央線に住んでいる無職と言われて思い浮かぶイメージのまんまの男。つまり、リベラルでポストモダンでオルタナティブでサブカルでロックなグランジでカート・コバーンを尊敬していて２７才で死ぬ定めにあると思っている。"
+		maker.channel.link = "http://xn--fdr45z90g374a.jp/"
+
+		maker.items.do_sort = true
+
+		articles.each do |article|
+			date = i[0]
+			title = article[1]
+			description = article[2]
+			link = article[3]
+			image = article[4]
+
+			next unless title
+			
+			item = maker.items.new_item
+			item.link = link if link
+			item.title = title
+			item.description = "<p>#{description}</p>" + "\r\n" +
+				image ? "<img src='#{image}'>" : ''
+			item.date = Date.parse(date)
+		end
+	end
+	rss.to_s
 end
 
 # 背景画像をランダムに選んでリダイレクトする
