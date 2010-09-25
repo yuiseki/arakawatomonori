@@ -17,6 +17,8 @@ helpers do
   def get_gdocs
     # キャッシュがあるか確認
     cache_path = 'tmp/gdocs.csv'
+      #puts options.account["username"]
+      #puts  options.account["password"]
     if File.exist?(cache_path)
       # csvからrowsをかえす
       rows = FasterCSV.read(cache_path)
@@ -55,26 +57,54 @@ end
 get '/rss' do
 end
 
+# 公開フォルダ一覧
+get '/files' do
+  @files = []
+  Dir::foreach('public/file/') {|f|
+    next if f == "." or f == ".." or f == ".gitignore" or f == "README.txt"
+    @files.push f
+  }
+  @files.map{|file| "<a href='/file/#{file}'>#{file}</a>"}.join("<hr />\n")
+end
+
+# 背景画像一覧
+get '/back' do
+  @files = []
+  Dir::foreach('public/back/summer/') {|f|
+    next if f == "." or f == ".." or f == ".gitignore"
+    @files.push f
+  }
+  @files.map{|file| "<img src='/back/summer/#{file}' width='300' height='240'>"}.join("\n")
+end
+
+
 # 背景画像をランダムに選んでリダイレクトする
 get '/back.jpg' do
   files = Dir.glob("public/back/summer/*.jpg")
   send_file files[rand(files.size)]
 end
 
-#-o-background-size:100% 100%, auto; -moz-background-size:100% 100%, auto; -webkit-background-size:100% 100%, auto; background-size: 100% 100%, auto; 
+
+# <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://荒川智則.jp/" data-count="vertical">Tweet</a>
+# <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
 template :index do
 <<EOF
 !!!
 %html
   %head
     %meta{ 'http-equiv' => 'content', :content => 'text/html; charset=utf-8'}
+    %meta{ 'name' => 'google-site-verification', :content => 'RqlA5emwjXQDEkZISWWiHkyFSNorrFiiaGrUKPlGnQw'}
     %title=@title
   %body{:style=>"background-image: url(/back.jpg); font-family:san-selif; background-size: contain;"}
-    %div{:style=>"width:800px;margin:auto;"}
-      %h1{:style=>"margin:15px; padding:10px; font-size:5em; background-image: url(/white80.png); border:1px solid black; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius:10px;"}=@title
+    %div{:style=>"width:650px;margin:auto;"}
+      %a{:href=>"http://twitter.com/share", :class=>"twitter-share-button", :"data-url"=>"http://荒川智則.jp/"}
+        Tweet
+      %script{:src=>"http://platform.twitter.com/widgets.js", :type=>"text/javascript"}
+      %h1{:style=>"margin:50px; padding:10px; font-size:5em; background-image: url(/white80.png); border:1px solid black; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius:10px;"}=@title
       - @result.each do |i|
         - unless i[1] == ""
-          %div{:style=>"background-image: url(/white80.png); margin:15px; padding:15px; border:1px solid black; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius:10px;"}
+          %div{:style=>"background-image: url(/white80.png); margin:50px; padding:15px; border:1px solid black; border-radius:10px; -webkit-border-radius: 10px; -moz-border-radius:10px;"}
             %a{:href=>i[3], :style=>"text-decoration: none;"}
               %h2= i[1]
               %p{:style=>"color:black;"}= i[0]
