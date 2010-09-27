@@ -65,7 +65,7 @@ get '/rss' do
 		maker.channel.description = "東京の中央線に住んでいる無職と言われて思い浮かぶイメージのまんまの男。つまり、リベラルでポストモダンでオルタナティブでサブカルでロックなグランジでカート・コバーンを尊敬していて２７才で死ぬ定めにあると思っている。"
 		maker.channel.link = "http://xn--fdr45z90g374a.jp/"
 
-		maker.items.do_sort = true
+		maker.items.do_sort = false
 
 		articles.each do |article|
 			date = article[0]
