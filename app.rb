@@ -89,22 +89,26 @@ end
 
 # 公開フォルダ一覧
 get '/files' do
-  @files = []
-  Dir::foreach('public/file/') {|f|
-    next if f == "." or f == ".." or f == ".gitignore" or f == "README.txt"
-    @files.push f
-  }
-  @files.map{|file| "<a href='/file/#{file}'>#{file}</a>"}.join("<hr />\n")
+	@files = []
+	Dir::foreach('public/file/') do |f|
+		next if f == "." or f == ".." or f == ".gitignore" or f == "README.txt"
+		@files.push f
+	end
+	@files.map do |file|
+		"<a href='/file/#{file}'>#{file}</a>"
+	end.join("<hr />\n")
 end
 
 # 背景画像一覧
 get '/back' do
-  @files = []
-  Dir::foreach('public/back/summer/') {|f|
-    next if f == "." or f == ".." or f == ".gitignore"
-    @files.push f
-  }
-  @files.map{|file| "<img src='/back/summer/#{file}' width='300' height='240'>"}.join("\n")
+	@files = []
+	Dir::foreach('public/back/summer/') do |f|
+		next if f == "." or f == ".." or f == ".gitignore"
+		@files.push f
+	end
+	@files.map do |file|
+		"<img src='/back/summer/#{file}' width='300' height='240'>"
+	end.join("\n")
 end
 
 
