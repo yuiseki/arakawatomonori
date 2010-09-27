@@ -80,9 +80,7 @@ get '/rss' do
 			item.link = link if link
 			item.title = title
 			item.description = "<p>#{description}</p>" + "\r\n" +
-				image ? "<img src='#{image}'>" : ''
-			#item.date = Date.parse(date)
-        puts date
+				image.empty? ? '' : "<img src='#{image}'>"
 			item.date = Date.strptime(date, "%m/%d/%Y %H:%M:%S").to_s
 		end
 	end
