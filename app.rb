@@ -68,19 +68,20 @@ get '/rss' do
 		maker.items.do_sort = false
 
 		articles.each do |article|
+      puts article
 			date = article[0]
 			title = article[1]
 			description = article[2]
 			link = article[3]
 			image = article[4]
 
-			next unless title
+			next if title.empty?
 			
 			item = maker.items.new_item
 			item.link = link if link
 			item.title = title
 			item.description = "<p>#{description}</p>" + "\r\n" +
-				image.empty? ? '' : "<img src='#{image}'>"
+				(image.empty? ? '' : "<img src='#{image}'>")
 			item.date = Date.strptime(date, "%m/%d/%Y %H:%M:%S").to_s
 		end
 	end
