@@ -78,7 +78,7 @@ get '/rss' do
 			next if title.empty?
 			
 			item = maker.items.new_item
-			item.link = link if link
+			item.link = (link.empty? ? maker.channel.link : link)
 			item.title = title
 			item.description = "<p>#{description}</p>" + "\r\n" +
 				(image.empty? ? '' : "<img src='#{image}'>")
