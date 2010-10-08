@@ -82,7 +82,11 @@ get '/rss' do
 			item.title = title
 			item.description = "<p>#{description}</p>" + "\r\n" +
 				(image.empty? ? '' : "<img src='#{image}'>")
-			item.date = Date.strptime(date, "%m/%d/%Y %H:%M:%S").to_s
+      begin
+			  item.date = Date.strptime(date, "%m/%d/%Y %H:%M:%S").to_s
+      rescue
+        item.date = Time.now
+      end
 		end
 	end
 	rss.to_s
