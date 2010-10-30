@@ -1,0 +1,11 @@
+app:
+  path: "/home/yuiseki/sinatra/arakawa/"
+
+backend:
+  type: "google_spreadsheet"
+  sheet_key: "tZ034W7OBe2_nmdh5XVw8Tg"
+
+site:
+  url: "http://xn--fdr45z90g374a.jp/"
+  title: "荒川智則.jp"
+  desc: "東京の中央線に住んでいる無職と言われて思い浮かぶイメージのまんまの男。つまり、リベラルでポストモダンでオルタナティブでサブカルでロックなグランジでカート・コバーンを尊敬していて２７才で死ぬ定めにあると思っている。"
