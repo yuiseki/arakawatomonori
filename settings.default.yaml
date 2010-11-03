@@ -3,7 +3,11 @@ app:
 
 backend:
   type: "google_spreadsheet"
-  sheet_key: "tZ034W7OBe2_nmdh5XVw8Tg"
+  sheet_key: your_spreadsheet_key
+
+oauth:
+  key: your_oauth_key
+  secret: your_oauth_secret
 
 site:
   url: "http://xn--fdr45z90g374a.jp/"

@@ -8,6 +8,9 @@ require "pit"
 require "helpers/gdocs"
 
 configure do
+	#require 'openssl'
+	#OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+	use Rack::Session::Cookie, :secret => Digest::SHA1.hexdigest(rand.to_s)
 	set :settings, YAML.load_file("settings.yaml")
 	set :account, Pit.get("google.com", :require => {
 							 "username" => "your email in Google",
@@ -15,8 +18,12 @@ configure do
 				 })
 end
 
-get '/' do
+def sitemap(path, desc)
+end
+
+get'/', {'sitemap' => ['/', 'サイトのトップページです']} do
 	@title = options.settings["site"]["title"]
+	@desc = "サイトのトップページです"
 	@result = get_recents
 	haml :root
 end
@@ -27,7 +34,7 @@ get '/style.css' do
 end
 
 get '/rss' do
-  create_rss
+	create_rss
 end
 
 get '/entry/:time' do
@@ -37,6 +44,8 @@ end
 
 get 'page/' do
 end
+
+load "extras/oauth.rb"
 
 # ランダム背景画像
 load "extras/back.rb"

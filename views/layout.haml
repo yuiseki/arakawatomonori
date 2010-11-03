@@ -7,12 +7,4 @@
   %body
     %div{:class=>"content"}
       %h1{:class=>"title"}=@title
-      - @result.each do |i|
-        - unless i[1] == ""
-          %div{:class=>"article"}
-            %a{:href=>i[3], :style=>"text-decoration: none;"}
-              %h2= i[1]
-              %p{:style=>"color:black;"}= i[0]
-              %pre{:style=>"color:black;"}= i[2]
-              - unless i[4] == ""
-                %img{:src=>i[4], :style=>"max-height:500px; max-width:500px;"}
+      = yield
