@@ -37,6 +37,11 @@ get '/rss' do
 	create_rss
 end
 
+get '/expire' do
+	expire_cache
+	"expire sucseed"
+end
+
 get '/entry/:time' do
 	@content = get_by_time(params[:time])
 	haml :entry

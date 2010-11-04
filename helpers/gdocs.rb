@@ -40,6 +40,13 @@ module Sinatra
 		end
 	end
 
+	def expire_cache
+		cache_path = options.settings["app"]["path"]+'tmp/gdocs.csv'
+		if File.exist?(cache_path)
+			File.delete(cache_path)
+		end
+	end
+
 	# 公開日時に一致するエントリを得る
 	def get_by_time(unixtime)
 		cache_path = options.settings["app"]["path"]+'tmp/gdocs.csv'
