@@ -1,8 +1,50 @@
 %div{:class=>"article"}
-  %h2=@subtitle
   %ul
-    %li="名前を荒川智則に変更します"
-    %li="tokenは保存せず、作業後破棄します"
+    %li
+      %a{:href=>"http://twitter.com/settings/profile"}
+        Twitterプロフィールの名前欄
+      を荒川智則に変更します。元の名前は上書きされます。
+    %li="数回のツイートでTHE☆荒川智則に協力してもらうかもしれません。"
+    %ul
+      %li
+        イヤだという場合、利用後に
+        %a{:href=>"http://twitter.com/settings/connections"}
+          http://twitter.com/settings/connections
+        にアクセスすることで拒否できます。
   %form{:action=>"", :method=>"POST"}
-    %input{:type=>"submit", :value=>"了解"}
+    %input{:type=>"submit", :value=>"すべてを受け入れ、荒川智則と同化する"}
 
+%div{:class=>"article"}
+  %script{:type => 'text/javascript', :src => "http://widgets.twimg.com/j/2/widget.js"}
+  :javascript
+    new TWTR.Widget({
+      version: 2,
+      type: 'search',
+      search: '#arakawa12',
+      interval: 6000,
+      title: '増えすぎ…',
+      subject: '荒川智則化装置 利用者喜びの声',
+      width: 640,
+      height: 200,
+      theme: {
+        shell: {
+          background: '#8ec1da',
+          color: '#ffffff'
+        },
+        tweets: {
+          background: '#ffffff',
+          color: '#444444',
+          links: '#1985b5'
+        }
+      },
+      features: {
+        scrollbar: false,
+        loop: true,
+        live: true,
+        hashtags: true,
+        timestamp: true,
+        avatars: true,
+        toptweets: true,
+        behavior: 'default'
+      }
+    }).render().start();

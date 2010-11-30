@@ -39,7 +39,7 @@ end
 
 get '/expire' do
 	expire_cache
-	"expire sucseed"
+	redirect '/'
 end
 
 get '/entry/:time' do
