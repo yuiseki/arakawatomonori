@@ -33,7 +33,7 @@ module Sinatra
 			# 日時でソートする
 			rows.sort {|a, b| Time.parse(b[0]) <=> Time.parse(a[0])}
 			# pagerizeまでの暫定処理
-			rows = rows[0...8]
+			rows = rows[0...10]
 			# キャッシュを残す
 			FasterCSV.open(cache_path, "w") do |csv|
 				rows.each do |row|

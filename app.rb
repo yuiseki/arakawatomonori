@@ -22,6 +22,7 @@ def sitemap(path, desc)
 end
 
 get'/', {'sitemap' => ['/', 'サイトのトップページです']} do
+	content_type 'text/html', :charset => 'utf-8'
 	@title = options.settings["site"]["title"]
 	@desc = "サイトのトップページです"
 	@result = get_recents
