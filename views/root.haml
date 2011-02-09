@@ -1,7 +1,7 @@
 - @result.each do |i|
   - unless i[1] == ""
     %div{:class=>"article"}
-      month, mday, year = i[0].split('/')
+      - month, mday, year = i[0].split('/')
       %p{:style=>"color:black; float: right;"}= "#{year}Ç¯#{month}·î#{mday}Æü"
       %a{:href=>i[3], :style=>"text-decoration: none;"}
         %h2= i[1]
